@@ -33,7 +33,7 @@ input[type=number] {
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand h-font" href="index.php">Tropic Dodo</a>
     <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@ input[type=number] {
         <li class="nav-item"><a class="nav-link active fw-bold m-2" aria-current="page" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link fw-bold m-2" href="#">About us</a></li>
         <li class="nav-item"><a class="nav-link fw-bold m-2" href="#">Packages</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold m-2" href="#">Contact us</a></li>
+        <li class="nav-item"><a class="nav-link fw-bold m-2" href="contact us.php">Contact us</a></li>
         <li class="nav-item"><a class="nav-link fw-bold m-2" href="flight.php">Flights</a></li>
       </ul>
       <form class="d-flex">
@@ -151,220 +151,56 @@ input[type=number] {
 </div>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Flight Booking</h1>
-
-        <!-- Flight Search Form -->
-        <form id="flightSearchForm" class="border p-4 shadow-sm rounded">
-            <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                    <label for="origin" class="form-label">Departure Airport</label>
-                    <input type="text" class="form-control" id="origin" placeholder="E.g., MUR (Mauritius)" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="destination" class="form-label">Destination Airport</label>
-                    <input type="text" class="form-control" id="destination" placeholder="E.g., JFK (New York)" required>
-                </div>
-            </div>
-            <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                    <label for="travelDate" class="form-label">Travel Date</label>
-                    <input type="date" class="form-control" id="travelDate" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="passengers" class="form-label">Passengers</label>
-                    <input type="number" class="form-control" id="passengers" min="1" value="1" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Search Flights</button>
-        </form>
-
-        <!-- Flight Results Section -->
-        <div class="mt-5">
-            <h2 class="text-center mb-4">Flight Results</h2>
-            <div id="flightResults" class="row g-4">
-                <!-- Flight results will be displayed here -->
-            </div>
-        </div>
-    </div>
-
-<script>
-document.getElementById("flightSearchForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    // Get input values
-    const origin = document.getElementById("origin").value;
-    const destination = document.getElementById("destination").value;
-    const travelDate = document.getElementById("travelDate").value;
-    const passengers = document.getElementById("passengers").value;
-
-    // Fetch flight data from backend API
-    try {
-        const response = await fetch(`/api/getFlights?origin=${origin}&destination=${destination}&date=${travelDate}&passengers=${passengers}`);
-        const flights = await response.json();
-
-        displayFlightResults(flights);
-    } catch (error) {
-        console.error("Error fetching flight data:", error);
-    }
-});
-
-// Function to display flight results
-function displayFlightResults(flights) {
-    const flightResults = document.getElementById("flightResults");
-    flightResults.innerHTML = ""; // Clear previous results
-
-    if (flights.length === 0) {
-        flightResults.innerHTML = "<p class='text-center'>No flights found. Please try again.</p>";
-        return;
-    }
-
-    flights.forEach((flight) => {
-        const flightCard = `
-            <div class="col-md-4">
-                <div class="card border-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">${flight.airline}</h5>
-                        <p class="card-text">
-                            Departure: ${flight.departure} <br>
-                            Arrival: ${flight.arrival} <br>
-                            Duration: ${flight.duration} <br>
-                            Price: <strong>$${flight.price}</strong>
-                        </p>
-                        <a href="#" class="btn btn-primary w-100">Book Now</a>
+        <h1 class="text-center mb-4">Book Your Flight - Indian Ocean Islands</h1>
+        <div class="card shadow">
+            <div class="card-body">
+                <form id="flightBookingForm">
+                    <div class="mb-3">
+                        <label for="departureIsland" class="form-label">Departure Island</label>
+                        <select class="form-select" id="departureIsland" required>
+                            <option value="" disabled selected>Select Departure Island</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Réunion">Réunion</option>
+                            <option value="Madagascar">Madagascar</option>
+                        </select>
                     </div>
-                </div>
-            </div>
-        `;
-        flightResults.innerHTML += flightCard;
-    });
-}
-</script>
-
-
-<br>
-<br>
-<br>
-<br>
-<div class="container my-5">
-    <!-- Navigation Tabs -->
-    <ul class="nav nav-pills mb-3" id="tabs">
-        <li class="nav-item">
-            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#all">All</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#recommended">Recommended</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#entebbe">Entebbe</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#kampala">Kampala</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#jinja">Jinja</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#murchison">Murchison</button>
-        </li>
-    </ul>
-
-    <!-- Listings -->
-    <div class="tab-content" id="tabContent">
-        <div class="tab-pane fade show active" id="all">
-            <div class="row row-cols-1 g-4">
-                <!-- Card 1 -->
-                <div class="col">
-                    <div class="card h-100 flex-row">
-                        <img src="https://via.placeholder.com/150" class="card-img-left" style="width: 150px;" alt="Horizon Entebbe">
-                        <div class="card-body">
-                            <h5 class="card-title">Horizon Entebbe</h5>
-                            <p class="card-text">Standard Double Room &middot; 1 large double bed &middot; Breakfast included &middot; 1 night, 2 adults</p>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                                <span class="fw-bold">US$170 / night</span>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="destinationIsland" class="form-label">Destination Island</label>
+                        <select class="form-select" id="destinationIsland" required>
+                            <option value="" disabled selected>Select Destination Island</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Réunion">Réunion</option>
+                            <option value="Madagascar">Madagascar</option>
+                        </select>
                     </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="col">
-                    <div class="card h-100 flex-row">
-                        <img src="https://via.placeholder.com/150" class="card-img-left" style="width: 150px;" alt="Kampala Nile Resort">
-                        <div class="card-body">
-                            <h5 class="card-title">Kampala Nile Resort</h5>
-                            <p class="card-text">Standard Room &middot; 1 extra-large double bed &middot; Breakfast included &middot; 1 night, 2 adults</p>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
-                                <span class="fw-bold">US$150 / night</span>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="departureDate" class="form-label">Departure Date</label>
+                        <input type="date" class="form-control" id="departureDate" required>
                     </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="col">
-                    <div class="card h-100 flex-row">
-                        <img src="https://via.placeholder.com/150" class="card-img-left" style="width: 150px;" alt="Lemala Wildwaters Lodge">
-                        <div class="card-body">
-                            <h5 class="card-title">Lemala Wildwaters Lodge</h5>
-                            <p class="card-text">Standard Suite &middot; 1 extra-large double bed &middot; All meals included &middot; 1 night, 2 adults</p>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
-                                <span class="fw-bold">US$702 / night</span>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="returnDate" class="form-label">Return Date</label>
+                        <input type="date" class="form-control" id="returnDate" required>
                     </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="col">
-                    <div class="card h-100 flex-row">
-                        <img src="https://via.placeholder.com/150" class="card-img-left" style="width: 150px;" alt="Chobe Safari Lodge">
-                        <div class="card-body">
-                            <h5 class="card-title">Chobe Safari Lodge</h5>
-                            <p class="card-text">King Room &middot; 1 double bed &middot; All meals included &middot; 1 night, 2 adults</p>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="text-warning">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
-                                <span class="fw-bold">US$315 / night</span>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="travellers" class="form-label">Number of Travelers</label>
+                        <input type="number" class="form-control" id="travellers" placeholder="Enter number of travelers" required>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary w-100">Book Flight</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Pagination -->
-    <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
-    </nav>
-</div>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // JavaScript to activate the tab on click
-    document.querySelectorAll('.nav-link').forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-        });
-    });
-</script>
-
+  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
