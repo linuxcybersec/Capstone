@@ -1,0 +1,125 @@
+/*main page home-page picture*/
+.fullscreen-img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.low-exposure {
+  filter: brightness(0.8);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.position-absolute {
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Align center */
+  text-align: center; /* Center-align text */
+}
+
+@media (max-width: 768px) {
+  .fullscreen-img {
+    height: 50vh;
+  }
+
+  .image-subtitle {
+    font-size: 2.5rem;
+    
+  }
+
+  .card-text {
+    font-size: 1rem;
+    padding: 0 10px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
+
+/*Typing text*/
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typed-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 2.5rem; /* Adjust as needed */
+  border-right: 3px solid #000; /* Cursor effect */
+  animation: typing 3s steps(30) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+}
+
+/* Blink effect */
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+
+/*5+ year Experience part*/
+.info-section {
+  background-color: #c3a251; /* Gold color */
+  color: white;
+  border-radius: 25px;
+  padding: 20px;
+}
+.info-section div {
+  text-align: center;
+}
+.info-section .border-end {
+  border-color: white !important; /* To ensure the border matches the text color */
+}
+
+
+/*css card for each island*/
+.travel-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 100%; /* Cards fill full height */
+}
+
+.travel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.travel-card:hover img {
+  transform: scale(1.05);
+}
+
+.travel-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+.row.g-4 > [class*="col-"] {
+  padding: 10px; /* Adds spacing between columns */
+}
+
